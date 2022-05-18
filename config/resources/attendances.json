@@ -1,0 +1,85 @@
+{
+  "version": "0.1",
+  "prefixes": {
+    "dct": "http://purl.org/dc/terms/",
+    "schema": "http://schema.org/",
+    "ext": "http://mu.semte.ch/vocabularies/ext/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "adms": "http://www.w3.org/ns/adms#"
+  },
+  "resources": {
+    "persons": {
+      "name": "person",
+      "class": "foaf:Person",
+      "attributes": {
+        "given-name": {
+          "type": "string",
+          "predicate": "foaf:givenName"
+        },
+        "family-name": {
+          "type": "string",
+          "predicate": "foaf:familyName"
+        }
+      },
+      "relationships": {
+        "attendances": {
+          "predicate": "dct:subject",
+          "target": "attendance",
+          "cardinality": "many",
+          "inverse": true
+        }
+      },
+      "new-resource-base": "http://data.bbw.craps.cloud/persons/",
+      "features": ["include-uri"]
+    },
+    "attendances": {
+      "name": "attendance",
+      "class": "ext:Attendance",
+      "attributes": {
+        "status": {
+          "type": "uri",
+          "predicate": "adms:status"
+        }
+      },
+      "relationships": {
+        "person": {
+          "predicate": "dct:subject",
+          "target": "person",
+          "cardinality": "one"
+        },
+        "events": {
+          "predicate": ":attendee",
+          "target": "attendance",
+          "cardinality": "one",
+          "inverse": true
+        }
+      },
+      "new-resource-base": "http://data.bbw.craps.cloud/attendances/",
+      "features": ["include-uri"]
+    },
+    "events": {
+      "name": "event",
+      "class": "schema:Event",
+      "attributes": {
+        "name": {
+          "type": "string",
+          "predicate": "schema:name"
+        },
+        "startDate": {
+          "type": "datetime",
+          "predicate": "schema:startDate"
+        }
+
+      },
+      "relationships": {
+        "attendances": {
+          "predicate": "schema:attendee",
+          "target": "attendance",
+          "cardinality": "many"
+        }
+      },
+      "new-resource-base": "http://data.bbw.craps.cloud/events/",
+      "features": ["include-uri"]
+    }
+  }
+}

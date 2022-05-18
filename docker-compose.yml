@@ -1,0 +1,69 @@
+version: '3.4'
+
+x-logging:
+  &default-logging
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  identifier:
+    image: semtech/mu-identifier:1.9.1
+    environment:
+      DEFAULT_MU_AUTH_ALLOWED_GROUPS_HEADER: "[{\"name\":\"clean\", \"variables\":[]}, {\"name\":\"public\", \"variables\":[]}]"
+    restart: always
+    logging: *default-logging
+  dispatcher:
+    image: semtech/mu-dispatcher:2.1.0-beta.1
+    volumes:
+      - ./config/dispatcher:/config
+    restart: always
+    logging: *default-logging
+  database:
+    image: semtech/mu-authorization:0.6.0-beta.7
+    environment:
+      MU_SPARQL_ENDPOINT: "http://triplestore:8890/sparql"
+    volumes:
+      - ./config/authorization:/config
+    restart: always
+    logging: *default-logging
+  triplestore:
+    image: redpencil/virtuoso:1.0.0
+    environment:
+      SPARQL_UPDATE: "true"
+      DEFAULT_GRAPH: "http://mu.semte.ch/graphs/bbw"
+    volumes:
+      - ./config/virtuoso/virtuoso.ini:/data/virtuoso.ini
+      - ./config/db/:/opt/virtuoso-scripts
+      - ./data/db:/data
+    restart: always
+    logging: *default-logging
+  delta-notifier:
+    image: semtech/mu-delta-notifier:0.1.0
+    volumes:
+      - ./config/delta:/config
+    restart: always
+    logging: *default-logging
+  migrations:
+    image: semtech/mu-migrations-service:0.7.0
+    links:
+      - triplestore:database
+    volumes:
+      - ./config/migrations:/data/migrations
+    restart: always
+    logging: *default-logging
+  cache:
+    image: semtech/mu-cache:2.0.2
+    links:
+    - resource:backend
+    restart: always
+    logging: *default-logging
+  resource:
+    image: semtech/mu-cl-resources:1.21.1
+    volumes:
+      - ./config/resources:/config
+    environment:
+      CACHE_CLEAR_PATH: "http://cache/.mu/clear-keys"
+    restart: always
+    logging: *default-logging
