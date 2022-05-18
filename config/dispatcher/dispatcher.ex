@@ -27,14 +27,14 @@ defmodule Dispatcher do
   ## Resources
 
   match "/events/*path", %{ layer: :services, accept: %{ json: true } } do
-    Proxy.forward conn, path, "http://cache/event/"
+    Proxy.forward conn, path, "http://cache/events/"
   end
 
   match "/attendances/*path", %{ layer: :services, accept: %{ json: true } } do
     Proxy.forward conn, path, "http://cache/attendances/"
   end
 
-  get "/persons/*path", %{ layer: :services, accept: %{ json: true } } do
+  match "/persons/*path", %{ layer: :services, accept: %{ json: true } } do
     Proxy.forward conn, path, "http://cache/persons/"
   end
 

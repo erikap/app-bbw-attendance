@@ -37,7 +37,7 @@
       "class": "ext:Attendance",
       "attributes": {
         "status": {
-          "type": "uri",
+          "type": "url",
           "predicate": "adms:status"
         }
       },
@@ -47,9 +47,9 @@
           "target": "person",
           "cardinality": "one"
         },
-        "events": {
-          "predicate": ":attendee",
-          "target": "attendance",
+        "event": {
+          "predicate": "schema:attendee",
+          "target": "event",
           "cardinality": "one",
           "inverse": true
         }
@@ -65,7 +65,7 @@
           "type": "string",
           "predicate": "schema:name"
         },
-        "startDate": {
+        "start-date": {
           "type": "datetime",
           "predicate": "schema:startDate"
         }
