@@ -42,7 +42,7 @@ defmodule Dispatcher do
   ## Authentication / login
 
   match "/sessions/*path", %{ layer: :services, accept: %{ json: true } } do
-    Proxy.forward conn, path, "http://msal-login/sessions/"
+    Proxy.forward conn, path, "http://login/sessions/"
   end
 
 
