@@ -11,10 +11,6 @@ defmodule Dispatcher do
 
   ## Static frontend resources of all kinds
 
-  get "/favicon.ico", %{ layer: :static } do
-    Proxy.forward conn, [], "http://frontend/favicon.ico"
-  end
-
   get "/assets/*path", %{ layer: :static } do
     Proxy.forward conn, path, "http://frontend/assets/"
   end
