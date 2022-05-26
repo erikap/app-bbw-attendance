@@ -34,6 +34,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://cache/persons/"
   end
 
+  match "/groups/*path", %{ layer: :services, accept: %{ json: true } } do
+    Proxy.forward conn, path, "http://cache/groups/"
+  end
+
 
   ## Authentication / login
 

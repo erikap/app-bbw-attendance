@@ -27,9 +27,34 @@
           "target": "attendance",
           "cardinality": "many",
           "inverse": true
+        },
+        "groups": {
+          "predicate": "foaf:member",
+          "target": "group",
+          "cardinality": "many",
+          "inverse": true
         }
       },
       "new-resource-base": "http://data.bbw.craps.cloud/persons/",
+      "features": ["include-uri"]
+    },
+    "groups": {
+      "name": "group",
+      "class": "foaf:Group",
+      "attributes": {
+        "name": {
+          "type": "string",
+          "predicate": "foaf:name"
+        }
+      },
+      "relationships": {
+        "members": {
+          "predicate": "foaf:member",
+          "target": "person",
+          "cardinality": "many"
+        }
+      },
+      "new-resource-base": "http://data.bbw.craps.cloud/groups/",
       "features": ["include-uri"]
     },
     "attendances": {

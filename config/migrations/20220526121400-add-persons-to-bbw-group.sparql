@@ -1,0 +1,11 @@
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
+INSERT {
+  GRAPH <http://mu.semte.ch/graphs/bbw> {
+    <http://data.bbw.craps.cloud/groups/fee12a69-f3fd-4611-af5c-c47dac75f0e2> foaf:member ?person .
+  }
+} WHERE {
+  GRAPH <http://mu.semte.ch/graphs/bbw> {
+    ?person a foaf:Person .
+  }
+}

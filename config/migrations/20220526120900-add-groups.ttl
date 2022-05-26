@@ -1,0 +1,14 @@
+@prefix mu: <http://mu.semte.ch/vocabularies/core/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+<http://data.bbw.craps.cloud/groups/fee12a69-f3fd-4611-af5c-c47dac75f0e2> a foaf:Group ;
+    mu:uuid "fee12a69-f3fd-4611-af5c-c47dac75f0e2" ;
+    foaf:name "BBW" .
+
+<http://data.bbw.craps.cloud/groups/52bbf949-b3fb-435e-a023-949e8e94ea21> a foaf:Group ;
+    mu:uuid "52bbf949-b3fb-435e-a023-949e8e94ea21" ;
+    foaf:name "YBBW" .
+
+<http://data.bbw.craps.cloud/groups/406a7f05-1153-4ddf-9857-a474ede9fdeb> a foaf:Group ;
+    mu:uuid "406a7f05-1153-4ddf-9857-a474ede9fdeb" ;
+    foaf:name "External" .
