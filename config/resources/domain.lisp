@@ -8,6 +8,7 @@
 (defparameter *cache-count-queries* t)
 (defparameter *cache-model-properties* t)
 (defparameter *log-delta-clear-keys* t)
+(defparameter *max-group-sorted-properties* nil)
 (defparameter sparql:*experimental-no-application-graph-for-sudo-select-queries* t)
 
 (read-domain-file "attendances.json")
