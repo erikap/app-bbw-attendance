@@ -45,6 +45,10 @@ defmodule Dispatcher do
     Proxy.forward conn, path, "http://login/sessions/"
   end
 
+  patch "/accounts/current/*path", %{ layer: :services, accept: %{ json: true } } do
+    Proxy.forward conn, path, "http://registration/accounts/current/"
+  end
+
 
   ## Fallback
 

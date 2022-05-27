@@ -58,7 +58,15 @@ services:
     restart: always
     logging: *default-logging
   login:
-    image: semtech/login-service:2.9.1
+    image: semtech/mu-login-service:2.9.1
+    environment:
+      USERS_GRAPH: "http://mu.semte.ch/graphs/users"
+      SESSIONS_GRAPH: "http://mu.semte.ch/graphs/sessions"
+    logging: *default-logging
+    labels:
+      - "logging=true"
+  registration:
+    image: semtech/mu-registration-service:2.7.1
     environment:
       USERS_GRAPH: "http://mu.semte.ch/graphs/users"
       SESSIONS_GRAPH: "http://mu.semte.ch/graphs/sessions"
@@ -79,8 +87,3 @@ services:
       CACHE_CLEAR_PATH: "http://cache/.mu/clear-keys"
     restart: always
     logging: *default-logging
-  project-scripts:
-    image: semtech/mu-scripts:1.0.0
-    volumes:
-      - ./scripts/:/app/scripts/
-    restart: "no"
