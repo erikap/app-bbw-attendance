@@ -1,0 +1,15 @@
+PREFIX adms: <http://www.w3.org/ns/adms#>
+
+DELETE {
+  GRAPH ?g {
+    ?s adms:status <http://data.bbw.craps.cloud/attendance-statuses/absent-without-reason>
+  }
+} INSERT {
+  GRAPH ?g {
+    ?s adms:status <http://data.bbw.craps.cloud/attendance-statuses/absent>
+  }
+} WHERE {
+  GRAPH ?g {
+    ?s adms:status <http://data.bbw.craps.cloud/attendance-statuses/absent-without-reason>
+  }
+}
