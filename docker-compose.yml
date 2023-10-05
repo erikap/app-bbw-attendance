@@ -9,13 +9,14 @@ x-logging:
 
 services:
   identifier:
-    image: semtech/mu-identifier:1.9.1
+    image: semtech/mu-identifier:1.10.1
     environment:
+      SESSION_COOKIE_SECURE: "on"
       DEFAULT_MU_AUTH_ALLOWED_GROUPS_HEADER: "[{\"name\":\"clean\", \"variables\":[]}, {\"name\":\"public\", \"variables\":[]}]"
     restart: always
     logging: *default-logging
   dispatcher:
-    image: semtech/mu-dispatcher:2.1.0-beta.1
+    image: semtech/mu-dispatcher:2.1.0-beta.2
     volumes:
       - ./config/dispatcher:/config
     restart: always
@@ -25,7 +26,7 @@ services:
     restart: always
     logging: *default-logging
   database:
-    image: semtech/mu-authorization:0.6.0-beta.7
+    image: semtech/mu-authorization:0.6.0-beta.8
     environment:
       MU_SPARQL_ENDPOINT: "http://triplestore:8890/sparql"
     volumes:
@@ -33,7 +34,7 @@ services:
     restart: always
     logging: *default-logging
   triplestore:
-    image: redpencil/virtuoso:1.0.0
+    image: redpencil/virtuoso:1.2.0-rc.1
     environment:
       SPARQL_UPDATE: "true"
       DEFAULT_GRAPH: "http://mu.semte.ch/graphs/bbw"
@@ -50,7 +51,7 @@ services:
     restart: always
     logging: *default-logging
   migrations:
-    image: semtech/mu-migrations-service:0.7.0
+    image: semtech/mu-migrations-service:0.8.0
     links:
       - triplestore:database
     volumes:
@@ -80,7 +81,7 @@ services:
     restart: always
     logging: *default-logging
   resource:
-    image: semtech/mu-cl-resources:1.21.1
+    image: semtech/mu-cl-resources:1.22.2
     volumes:
       - ./config/resources:/config
     environment:
