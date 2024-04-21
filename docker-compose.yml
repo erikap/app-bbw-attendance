@@ -22,7 +22,7 @@ services:
     restart: always
     logging: *default-logging
   frontend:
-    image: erikap/frontend-bbw-attendance:0.9.0
+    image: erikap/frontend-bbw-attendance:0.10.0
     restart: always
     logging: *default-logging
   database:
