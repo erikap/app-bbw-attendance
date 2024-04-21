@@ -64,6 +64,10 @@
         "status": {
           "type": "url",
           "predicate": "adms:status"
+        },
+        "category": {
+          "type": "url",
+          "predicate": "schema:category"
         }
       },
       "relationships": {
